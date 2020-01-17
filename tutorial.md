@@ -5,6 +5,7 @@
 1. Getting started
 1. Installing express
 1. Configure version control with `git` (with `.gitignore` and commit owner)
+1. Upload to github
 1. Generating the express project
 1. Remove unnecessary files and convert to `ES6`
 1. Adding development dependencies
@@ -20,7 +21,7 @@ Open your terminal and create a new directory with the below command
 
 `mkdir express-api-template`
 
-Navigate into the newly created directory with
+Navigate into the newly created directory with the command
 
 `cd express-api-template`
 
@@ -28,7 +29,7 @@ Now, initialize a new npm project with the command
 
 `npm init`
 
-Answer the questions that follow and when done you have a new javascript project. At this point you have only one file in the folder named `package.json`. This file holds information about your project. \
+Answer the questions that follow and when done you have a new javascript project. At this point you have only one file in the folder named `package.json`. This file holds various information about your project.
 
 At this point I usually like to add a `README.md` file to my project. So go ahead and create that file at the root of your project. Now you have two files in your folder.
 
@@ -45,31 +46,33 @@ EXPRESS-API-TEMPLATE/
 
 ## Installing express
 
-Now it's time to install the package that powers the API. You can read about express on [expressjs.com](https://expressjs.com/)
+Now it's time to install the package that powers the API. You can read about express on the official [site](https://expressjs.com/)
 
-On your terminal run either of the following commands
+On your terminal and still in the `express-api-template` directory, run either of the following commands
 
 `yarn add express` or `npm install express`
 
-Note: You can either use yarn or npm as your dependency manager. I find that I like yarn better. At this point if you check the `package.json` file you'll see express listed as a dependency. You also get a `node_modules` folder.
+Note: You can either use `yarn` or `npm` as your dependency manager. I find that I like yarn better. At this point if you check the `package.json` file you'll see express listed as a dependency.
 
 ```json
   "dependencies": {
-    "express": "^4.17.1",
+      "express": "^4.17.1",
   }
 ```
+
+You also get a `node_modules` folder at the root of your project.
 
 ## Configure version control with `git`
 
 At this point we should configure version control using `git`.
 
-On your terminal issue the command
+On your terminal and still in the `express-api-template` directory, issue the command
 
 `git init`
 
-This initialises the current folder to use version control.
+This initializes the current folder to use `git` version control.
 
-Next we create a `.gitignore` file. Inside this file we add the names of files and folders that we don't care about tracking how they have changed for whatever reason. One such folder is the `node_modules` folder.
+Next we create a `.gitignore` file. Inside this file we add the names of files and folders that we don't care about keeping track of how they have changed over time. One such folder is the `node_modules` folder.
 
 On your terminal, if you're on a mac you can create the file with
 
@@ -95,6 +98,22 @@ Now commit these files with the following commands in order
 
 `git commit -m "Initial commit"`
 
+## Upload to `Github`
+
+Now head over to [Github](https://github.com). Create an account if you don't have one yet and create a new repository. [Here](https://www.maketecheasier.com/get-started-git-github/) is a short and excellent guide to help you get started.
+
+When creating the repository be sure to not check the option **Initialize this repository with a README** as we already have a `README.md` file. The description is optional as well and you can leave the repository as either public or private. But it's advisable you leave it as public if you're new to github. Click `Create repository`.
+
+On the new page, we will be making use of the second setup option **…or push an existing repository from the command line**. Copy the displayed command one by one and run them in your terminal
+
+`git remote add origin repo_link`
+
+`git push -u origin master`
+
+Enter your username and password when prompted for your credentials.
+
+If you do have 2-factor authentication on, then go to [Personal access tokens](https://github.com/settings/tokens), generate a new token and use it as your username when prompted for your credentials. Leave the password blank.
+
 ## Generating the express project
 
 It's possible to manually set up your server from scratch, but to make our life easier we'll use the express generator package. You can learn more about it [here](https://expressjs.com/en/starter/generator.html).
@@ -104,6 +123,40 @@ Install it with either of the following commands
 
 To generate the project run the following command
 
-`express src`
+`express -f`
 
-This generates the necessary files and puts them inside a folder named `src`
+The `-f` flag forces express to create the project in the current directory.
+
+Delete both the `public/` and `views/` folder as we will be writing a separate frontend for our app.
+
+Rename the file `bin/www` to `bin/www.js`.
+
+Create a new folder named `src/` and move `app.js` file, `bin/` folder, and `routes` folder inside.
+
+At this point your project folder structure looks like below.
+
+```cmd
+EXPRESS-API-TEMPLATE/
+    node_modules/
+    src/
+        bin/
+            www.js
+        routes/
+            index.js
+            users.js
+        app.js
+        package.json
+    .editorconfig
+    .gitignore
+    package.json
+    README.md
+    yarn.lock
+```
+
+Open up `package.json` and update the `start` script to look like below
+
+`"start": "node ./src/bin/www"`
+
+Now run either
+
+`yarn` or `npm install`
