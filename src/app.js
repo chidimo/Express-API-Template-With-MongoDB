@@ -1,11 +1,10 @@
-var logger = require('morgan');
-var express = require('express');
-var createError = require('http-errors');
-var cookieParser = require('cookie-parser');
+import logger from 'morgan';
+import express from 'express';
+import cookieParser from 'cookie-parser';
 
-var indexRouter = require('./routes/index');
+import indexRouter from './routes/index';
 
-var app = express();
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -14,4 +13,4 @@ app.use(cookieParser());
 
 app.use('/', indexRouter);
 
-module.exports = app;
+export default app;
