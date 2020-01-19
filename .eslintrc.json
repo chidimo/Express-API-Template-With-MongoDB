@@ -21,6 +21,7 @@
         "semi": ["error", "always"],
         "no-console": 1,
         "object-curly-spacing": ["warn", "always"],
-        "array-bracket-spacing": ["warn", "always"]
+        "array-bracket-spacing": ["warn", "always"],
+        "import/prefer-default-export": [0]
     }
 }

@@ -12,9 +12,8 @@
 1. Remove unnecessary files
 1. Running the app
 1. Moving to`ES6`
-1. Configuring development dependencies: babel, nodemon, eslint, and prettier
-1. Add development dependencies
-1. Configure environment variables
+1. Configuring development dependencies: `babel`, `nodemon`, `eslint`, and `prettier`
+1. Settings and environment variables. `.env` file.
 1. Configure CI/CD tools
 1. Write your first test
 1. Yarn equivalent in npm
@@ -404,7 +403,6 @@ Create a file `nodemon.json` and add the code below
 ```json
 {
     "watch": [
-        ".env",
         "package.json",
         "nodemon.json",
         ".eslintrc.json",
@@ -516,3 +514,71 @@ Add `yarn-error.log` to `.gitignore` file. Commit your changes and push to Githu
 `git commit -m "configure dev dependencies"`
 
 `git push`
+
+## Settings and environment variables. `.env` file
+
+You should have your server running
+
+In almost every project there will come a time when you must have a place to hold global settings that will be used throughout your app. Say for example you want to use an AWS secret. You can treat this as a setting that will be placed in a file so you can use it anywhere in your file.
+
+For this purpose I use a `settings.js` file at the root of my project. Some people may prefer `config.js`, but coming from a python background `settings.js` feels more natural to me.
+
+Oftentimes the variables in your settings file will come from environment variables. For security reasons, we never keep things like API keys in a place where more than one person has access. To make this feasible we make use of a `.env` file. This file only exists in your local machine. It holds all your API keys and secrets.
+
+Go ahead and create the `.env` file at the root of your project and `settings.js` file inside the `src/` folder. Add the `.env` file to the `.gitignore` and `nodemon.json` files.
+
+Inside the `.env` file add the following
+
+`TEST_ENV_VARIABLE="Environment Variable is working"`
+
+To be able to read the `.env` file we make use of the `dotenv` package. Go ahead and install it with
+
+`yarn add dotenv`
+
+Note that this package is also needed in production.
+
+Open up `settings.js` and add the below code
+
+```javascript
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+export const testEnvironmentVariable = process.env.TEST_ENV_VARIABLE.trim();
+```
+
+The `trim()` method helps to remove any extraneous spaces around the value of the variable.
+
+At this point you may notice `ESLint` raises the _Prefer default export_ warning in `settings.js` file. Go ahead and add the following line under the `rules` key of your `eslintrc.json` file.
+
+`"import/prefer-default-export": [0]`
+
+We're gonna see this environment variable in the browser. Go ahead and edit `src/index.js` to look like below
+
+```javascript
+import express from 'express';
+
+import { testEnvironmentVariable } from '../settings';
+
+const indexRouter = express.Router();
+
+indexRouter.get('/', (req, res) =>
+    res.status(200).json({ message: testEnvironmentVariable })
+);
+
+export default indexRouter;
+```
+
+Now visit `http://localhost:3000/`. You should see this
+
+```json
+{
+    "message": "Environment Variable is okay"
+}
+```
+
+And that's it. From now on we can add as many environment variables as we want and we can read all of them inside our settings file.
+
+Now prettify and lint with the `yarn pretty` command.
+
+Commit your changes and push to github.
