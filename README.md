@@ -42,7 +42,7 @@ I also like adding a `.editorconfig` file. Read more about it [here](https://edi
 
 At this point your folder looks like below
 
-```cmd
+```javascript
 EXPRESS-API-TEMPLATE/
     .editorconfig
     package.json
@@ -89,7 +89,7 @@ This creates the `.gitignore` file and writes `node_modules/` in it.
 
 At this point your folder structure looks like below
 
-```cmd
+```javascript
 EXPRESS-API-TEMPLATE/
     node_modules/
     .editorconfig
@@ -148,7 +148,7 @@ Create a new folder named `src/` and move `app.js` file, `bin/` folder, and `rou
 
 At this point your project folder structure looks like below.
 
-```cmd
+```javascript
 EXPRESS-API-TEMPLATE/
     node_modules/
     src/
@@ -486,7 +486,7 @@ Run `yarn pretty`. You should see that we have only two warnings about the prese
 
 Here's what out project structure looks like at this point
 
-```cmd
+```javascript
 EXPRESS-API-TEMPLATE/
     node_modules/
     src/
@@ -529,7 +529,7 @@ Go ahead and create the `.env` file at the root of your project and `settings.js
 
 Inside the `.env` file add the following
 
-`TEST_ENV_VARIABLE="Environment Variable is working"`
+`TEST_ENV_VARIABLE="Environment variable is coming across"`
 
 To be able to read the `.env` file we make use of the `dotenv` package. Go ahead and install it with
 
@@ -573,12 +573,37 @@ Now visit `http://localhost:3000/`. You should see this
 
 ```json
 {
-    "message": "Environment Variable is okay"
+    "message": "Environment variable is coming across"
 }
 ```
 
 And that's it. From now on we can add as many environment variables as we want and we can read all of them inside our settings file.
 
 Now prettify and lint with the `yarn pretty` command.
+
+Here's what out project structure looks like at this point
+
+```javascript
+EXPRESS-API-TEMPLATE/
+    node_modules/
+    src/
+        bin/
+            www.js
+        routes/
+            index.js
+        app.js
+        settings.js
+    .babelrc
+    .editorconfig
+    .env
+    .eslintrc.json
+    .gitignore
+    .prettierrc
+    nodemon.json
+    package.json
+    README.md
+    yarn-error.log
+    yarn.lock
+```
 
 Commit your changes and push to github.
