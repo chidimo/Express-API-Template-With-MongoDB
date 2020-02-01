@@ -47,9 +47,9 @@ At this point your folder looks like below
 
 ```javascript
 EXPRESS-API-TEMPLATE/
-    .editorconfig
-    package.json
-    README.md
+  .editorconfig
+  package.json
+  README.md
 ```
 
 ## Installing express
@@ -94,12 +94,12 @@ At this point your folder structure looks like below
 
 ```javascript
 EXPRESS-API-TEMPLATE/
-    node_modules/
-    .editorconfig
-    .gitignore
-    package.json
-    README.md
-    yarn.lock
+  node_modules/
+  .editorconfig
+  .gitignore
+  package.json
+  README.md
+  yarn.lock
 ```
 
 Now commit these files with the following commands in order
@@ -153,18 +153,18 @@ At this point your project folder structure looks like below.
 
 ```javascript
 EXPRESS-API-TEMPLATE/
-    node_modules/
-    src/
-        bin/
-            www.js
-        routes/
-            index.js
-        app.js
-    .editorconfig
-    .gitignore
-    package.json
-    README.md
-    yarn.lock
+  node_modules/
+  src/
+      bin/
+          www.js
+      routes/
+          index.js
+      app.js
+  .editorconfig
+  .gitignore
+  package.json
+  README.md
+  yarn.lock
 ```
 
 Open up `package.json` and update the `start` script to look like below
@@ -199,7 +199,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    return res.status(200).json({ message: 'Welcome to Express API template' });
+  return res.status(200).json({ message: 'Welcome to Express API template' });
 });
 
 module.exports = router;
@@ -221,7 +221,7 @@ Visit `http://localhost:3000/` in your browser. You should see the following jso
 
 ```json
 {
-    "message": "Welcome to Express API template"
+  "message": "Welcome to Express API template"
 }
 ```
 
@@ -245,7 +245,7 @@ import express from 'express';
 const indexRouter = express.Router();
 
 indexRouter.get('/', (req, res) =>
-    res.status(200).json({ message: 'Welcome to Express API template' })
+  res.status(200).json({ message: 'Welcome to Express API template' })
 );
 
 export default indexRouter;
@@ -292,19 +292,19 @@ import app from '../app';
  */
 
 const normalizePort = val => {
-    const port = parseInt(val, 10);
+  const port = parseInt(val, 10);
 
-    if (Number.isNaN(port)) {
-        // named pipe
-        return val;
-    }
+  if (Number.isNaN(port)) {
+    // named pipe
+    return val;
+  }
 
-    if (port >= 0) {
-        // port number
-        return port;
-    }
+  if (port >= 0) {
+    // port number
+    return port;
+  }
 
-    return false;
+  return false;
 };
 
 /**
@@ -325,25 +325,25 @@ const server = http.createServer(app);
  */
 
 const onError = error => {
-    if (error.syscall !== 'listen') {
-        throw error;
-    }
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
 
-    const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
+  const bind = typeof port === 'string' ? `Pipe ${port}` : `Port ${port}`;
 
-    // handle specific listen errors with friendly messages
-    switch (error.code) {
-        case 'EACCES':
-            alert(`${bind} requires elevated privileges`);
-            process.exit(1);
-            break;
-        case 'EADDRINUSE':
-            alert(`${bind} is already in use`);
-            process.exit(1);
-            break;
-        default:
-            throw error;
-    }
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      alert(`${bind} requires elevated privileges`);
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      alert(`${bind} is already in use`);
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
 };
 
 /**
@@ -351,10 +351,9 @@ const onError = error => {
  */
 
 const onListening = () => {
-    const addr = server.address();
-    const bind =
-        typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-    debug(`Listening on ${bind}`);
+  const addr = server.address();
+  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
+  debug(`Listening on ${bind}`);
 };
 
 /**
@@ -405,15 +404,15 @@ Create a file `nodemon.json` and add the code below
 
 ```json
 {
-    "watch": [
-        "package.json",
-        "nodemon.json",
-        ".eslintrc.json",
-        ".babelrc",
-        "src/"
-    ],
-    "verbose": true,
-    "ignore": ["*.test.js", "*.spec.js"]
+  "watch": [
+    "package.json",
+    "nodemon.json",
+    ".eslintrc.json",
+    ".babelrc",
+    "src/"
+  ],
+  "verbose": true,
+  "ignore": ["*.test.js", "*.spec.js"]
 }
 ```
 
@@ -435,30 +434,33 @@ Now create the file name `eslintrc.json` and add the below code
 
 ```json
 {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "node": true,
-        "mocha": true
-    },
-    "extends": ["airbnb-base"],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "rules": {
-        "indent": ["warn", 4],
-        "linebreak-style": ["error", "unix"],
-        "quotes": ["error", "single"],
-        "semi": ["error", "always"],
-        "no-console": 1,
-        "object-curly-spacing": ["warn", "always"],
-        "array-bracket-spacing": ["warn", "always"]
-    }
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "extends": ["airbnb-base"],
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["warn", 2],
+    "linebreak-style": ["error", "unix"],
+    "quotes": ["error", "single"],
+    "semi": ["error", "always"],
+    "no-console": 1,
+    "comma-dangle": [0],
+    "arrow-parens": [0],
+    "object-curly-spacing": ["warn", "always"],
+    "array-bracket-spacing": ["warn", "always"],
+    "import/prefer-default-export": [0]
+  }
 }
 ```
 
@@ -466,10 +468,10 @@ Create a file named `.prettierrc` and add the code below
 
 ```json
 {
-    "trailingComma": "es5",
-    "tabWidth": 4,
-    "semi": true,
-    "singleQuote": true
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "semi": true,
+  "singleQuote": true
 }
 ```
 
@@ -477,7 +479,7 @@ Add the following scripts to your `package.json`
 
 `"lint": "./node_modules/.bin/eslint ./src"`
 
-`"pretty": "prettier --write '**/*.{js,json,md}' '!node_modules/**'"`,
+`"pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'"`,
 
 `"postpretty": "yarn lint --fix"`
 
@@ -491,23 +493,23 @@ Here's what out project structure looks like at this point
 
 ```javascript
 EXPRESS-API-TEMPLATE/
-    node_modules/
-    src/
-        bin/
-            www.js
-        routes/
-            index.js
-        app.js
-    .babelrc
-    .editorconfig
-    .eslintrc.json
-    .gitignore
-    .prettierrc
-    nodemon.json
-    package.json
-    README.md
-    yarn-error.log
-    yarn.lock
+  node_modules/
+  src/
+      bin/
+          www.js
+      routes/
+          index.js
+      app.js
+  .babelrc
+  .editorconfig
+  .eslintrc.json
+  .gitignore
+  .prettierrc
+  nodemon.json
+  package.json
+  README.md
+  yarn-error.log
+  yarn.lock
 ```
 
 Add `yarn-error.log` to `.gitignore` file. Commit your changes and push to Github.
@@ -566,7 +568,7 @@ import { testEnvironmentVariable } from '../settings';
 const indexRouter = express.Router();
 
 indexRouter.get('/', (req, res) =>
-    res.status(200).json({ message: testEnvironmentVariable })
+  res.status(200).json({ message: testEnvironmentVariable })
 );
 
 export default indexRouter;
@@ -576,7 +578,7 @@ Now visit `http://localhost:3000/`. You should see this
 
 ```json
 {
-    "message": "Environment variable is coming across"
+  "message": "Environment variable is coming across"
 }
 ```
 
@@ -588,25 +590,25 @@ Here's what out project structure looks like at this point
 
 ```javascript
 EXPRESS-API-TEMPLATE/
-    node_modules/
-    src/
-        bin/
-            www.js
-        routes/
-            index.js
-        app.js
-        settings.js
-    .babelrc
-    .editorconfig
-    .env
-    .eslintrc.json
-    .gitignore
-    .prettierrc
-    nodemon.json
-    package.json
-    README.md
-    yarn-error.log
-    yarn.lock
+  node_modules/
+  src/
+      bin/
+          www.js
+      routes/
+          index.js
+      app.js
+      settings.js
+  .babelrc
+  .editorconfig
+  .env
+  .eslintrc.json
+  .gitignore
+  .prettierrc
+  nodemon.json
+  package.json
+  README.md
+  yarn-error.log
+  yarn.lock
 ```
 
 Commit your changes and push to github.
