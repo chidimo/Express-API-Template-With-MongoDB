@@ -14,9 +14,12 @@
 1. Moving to`ES6`
 1. Configuring development dependencies: `babel`, `nodemon`, `eslint`, and `prettier`
 1. Settings and environment variables. `.env` file.
-1. Configure CI/CD tools
-1. Write your first test
-1. Yarn equivalent in npm
+1. Writing your first test: configure CI/CD, and badges
+1. Writing your first controller
+1. Writing your first middleware
+1. Writing your first model
+1. Configure `PostgreSQL`
+1. Configure `MongoDB`
 
 ## Getting started
 
