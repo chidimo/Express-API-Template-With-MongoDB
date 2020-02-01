@@ -612,3 +612,68 @@ EXPRESS-API-TEMPLATE/
 ```
 
 Commit your changes and push to github.
+
+## Writing your first test: configure CI/CD, and badges
+
+It's time to write our first test. In our tests, we will be make calls to our API endpoints and check what is returned to be sure it's what we expect. We will be making use of the following tools.
+
+1. `mocha` - test runner
+1. `chai` - used to make assertions
+1. `nyc` - collect test coverage report
+1. `sinon` - for spying, stubbing, and mocking
+1. `sinon-chai` - extends chai's assertions
+1. `supertest` - used to make http calls to our API endpoints
+1. `coveralls` - for uploading test coverage to <https://coveralls.io>
+
+Copy and paste the code below into your terminal and run it.
+
+`yarn add mocha chai sinon nyc sinon-chai supertest coveralls -D`
+
+Create a new folder called `test` at the root of your project. `mocha` finds and executes this file automatically. Create two files inside the `test/` folder: `test/setup.js` and `test/index.test.js`.
+
+Add a new `test` entry to the scripts section of our package.json file.
+
+Open up `test/setup.js` and paste the below code. This is just a helper file that helps us organize all the imports we need in our test files.
+
+```javascript
+import supertest from 'supertest';
+import chai from 'chai';
+import sinonChai from 'sinon-chai';
+
+import app from '../src/app';
+
+chai.use(sinonChai);
+
+export const { expect } = chai;
+export const server = supertest.agent(app);
+export const BASE_URL = '/';
+```
+
+Open up `index.test.js` and paste the following code. Here we simply request the base endpoint, which is `/` and assert that the body object has a `message` key with a value of `Environment variable is coming across.`
+
+```javascript
+import { expect, server, BASE_URL } from './setup';
+
+describe('Index page test', () => {
+  it('get base url', done => {
+    server
+      .get(`${BASE_URL}`)
+      .expect(200)
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body.message).to.equal(
+          'Environment variable is coming across.'
+        );
+        done();
+      });
+  });
+});
+```
+
+`"test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register"`
+
+Now run `yarn test`. You should see a test report in your terminal that looks similar to the picture below.
+
+![Test report](imgs/test-report-01.png)
+
+Two additional folders are generated: `.nyc_output/` and `coverage/`. Add both to your `.gitignore` file. I encourage you to take a look inside the `coverage/` folder, open up `coverage/index.html` in a browser and see test report for each file.
