@@ -45,12 +45,7 @@ I also like adding a `.editorconfig` file. Read more about it [here](https://edi
 
 At this point your folder looks like below
 
-```javascript
-EXPRESS-API-TEMPLATE/
-  .editorconfig
-  package.json
-  README.md
-```
+![Folder structure 01](imgs/folder-structure-01.png)
 
 ## Installing express
 
@@ -92,15 +87,7 @@ This creates the `.gitignore` file and writes `node_modules/` in it.
 
 At this point your folder structure looks like below
 
-```javascript
-EXPRESS-API-TEMPLATE/
-  node_modules/
-  .editorconfig
-  .gitignore
-  package.json
-  README.md
-  yarn.lock
-```
+![Folder structure 02](imgs/folder-structure-02.png)
 
 Now commit these files with the following commands in order
 
@@ -151,21 +138,7 @@ Create a new folder named `src/` and move `app.js` file, `bin/` folder, and `rou
 
 At this point your project folder structure looks like below.
 
-```javascript
-EXPRESS-API-TEMPLATE/
-  node_modules/
-  src/
-      bin/
-          www.js
-      routes/
-          index.js
-      app.js
-  .editorconfig
-  .gitignore
-  package.json
-  README.md
-  yarn.lock
-```
+![Folder structure 03](imgs/folder-structure-03.png)
 
 Open up `package.json` and update the `start` script to look like below
 
@@ -491,26 +464,7 @@ Run `yarn pretty`. You should see that we have only two warnings about the prese
 
 Here's what out project structure looks like at this point
 
-```javascript
-EXPRESS-API-TEMPLATE/
-  node_modules/
-  src/
-      bin/
-          www.js
-      routes/
-          index.js
-      app.js
-  .babelrc
-  .editorconfig
-  .eslintrc.json
-  .gitignore
-  .prettierrc
-  nodemon.json
-  package.json
-  README.md
-  yarn-error.log
-  yarn.lock
-```
+![Folder structure 04](imgs/folder-structure-04.png)
 
 Add `yarn-error.log` to `.gitignore` file. Commit your changes and push to Github.
 
@@ -588,28 +542,7 @@ Now prettify and lint with the `yarn pretty` command.
 
 Here's what out project structure looks like at this point
 
-```javascript
-EXPRESS-API-TEMPLATE/
-  node_modules/
-  src/
-      bin/
-          www.js
-      routes/
-          index.js
-      app.js
-      settings.js
-  .babelrc
-  .editorconfig
-  .env
-  .eslintrc.json
-  .gitignore
-  .prettierrc
-  nodemon.json
-  package.json
-  README.md
-  yarn-error.log
-  yarn.lock
-```
+![Folder structure 05](imgs/folder-structure-05.png)
 
 Commit your changes and push to github.
 
