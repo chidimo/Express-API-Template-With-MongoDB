@@ -1,4 +1,10 @@
-# Express API Template tutorial
+# Express API Template
+
+[![Build Status](https://travis-ci.com/chidimo/Express-API-template.svg?token=vRPqNDsj84fjiYCWzphq&branch=master)](https://travis-ci.com/chidimo/Express-API-template)
+[![Build status](https://ci.appveyor.com/api/projects/status/c9qj8j26s2kf0dkl?svg=true)](https://ci.appveyor.com/project/chidimo/express-api-template)
+[![Coverage Status](https://coveralls.io/repos/github/chidimo/Express-API-template/badge.svg?branch=master)](https://coveralls.io/github/chidimo/Express-API-template?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a02e1a5e4c4f49f1e5a2/maintainability)](https://codeclimate.com/github/chidimo/Express-API-template/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a02e1a5e4c4f49f1e5a2/test_coverage)](https://codeclimate.com/github/chidimo/Express-API-template/test_coverage)
 
 ## How to set up a backend API project using express (mongodb and postgres)
 
@@ -14,7 +20,8 @@
 1. Moving to`ES6`
 1. Configuring development dependencies: `babel`, `nodemon`, `eslint`, and `prettier`
 1. Settings and environment variables. `.env` file.
-1. Writing your first test: configure CI/CD, and badges
+1. Writing your first test
+1. Configure CI/CD, and badges
 1. Writing your first controller
 1. Writing your first middleware
 1. Writing your first model
@@ -610,3 +617,122 @@ Now run `yarn test`. You should see a test report in your terminal that looks si
 ![Test report](imgs/test-report-01.png)
 
 Two additional folders are generated: `.nyc_output/` and `coverage/`. Add both to your `.gitignore` file. I encourage you to take a look inside the `coverage/` folder, open up `coverage/index.html` in a browser and see test report for each file.
+
+Commit your code and push it to Github
+
+## Configure CI/CD, and badges
+
+Now its time to configure continuous integration and continuous deployment (CI/CD) tools. In this section we will configure travis-ci, coveralls, appveyor, and codeclimate. We will also add badges to our README file.
+
+### travis-ci
+
+1. Vist <https://travis-ci.com/> and create an account if you don't have one. You have to sign up with your github account.
+1. Hover over the dropdown arrow next to your profile picture and click settings.
+1. Under `Repositories` tab click `Manage repositories on Github`. Once you're redirected to the Github page, click the checkbox next to `Only select repositories`.
+1. Click the `Select repositories` dropdown and find the `Express-API-template` repo. Click it to add it to the list of repositories you want to add to travis-ci.
+1. Click `Approve and install` and wait to be redirected back to travis-ci.
+1. At the top of the repo page, close to the repo name, click on the `build unknown` icon. From the dropdown, select the Status Image format of markdown.
+1. Copy the resulting code and paste it in your README.md file.
+1. On the project page, click on `More options` > `Settings`. Under `Environment Variables` section, add the `TEST_ENV_VARIABLE` env variable. When entering its value, be sure to have it within double quotes like this *"Environment variable is coming across."*
+1. Create `.travis.yml` file at the root of your project and paste in the below code (Remember to set the value of `CC_TEST_REPORTER_ID`. We'll get to it in the codeclimate section).
+
+```yml
+language: node_js
+env:
+  global:
+    - CC_TEST_REPORTER_ID=get-this-from-code-climate-repo-page
+matrix:
+  include:
+  - node_js: '12'
+cache:
+  directories: [node_modules]
+install:
+  yarn
+after_success: yarn coverage
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - yarn test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+```
+
+Here, we're instructing travis to use `node.js` version 12. We also want to cache the `node_modules/` directory so it doesn't have to be regenerated each time. The `before_script` and `after_script` commands are used to upload coverage results to `codeclimate`. We'll configure `codeclimate` shortly. After `yarn test` runs we want to also run `yarn coverage`. We will configure this next.
+
+### coveralls
+
+1. Visit <https://coveralls.io/> and either sign in or sign up with your Github account.
+1. Hover over the left hand side of the screen to reveal the navigation menu. click on `ADD REPOS`.
+1. Search for the express-API-template repo and turn on covrage using the toggle button on the left hand side. If you can't find it, click on `SYNC REPOS` on the upper right hand corner and try again.
+1. Create the `.coveralls.yml` file at the root of your project and enter the below code. To get the `repo_token`, click on the repo details to find it.
+
+```yml
+repo_token: get-this-from-repo-settings-on-coveralls.io
+service_name: travis-ci
+```
+
+Now add the `coverage` command to the `scripts` section of your `package.json` file.
+
+`"coverage": "nyc report --reporter=text-lcov | coveralls"`
+
+Run `yarn coverage`. Provided you have a working internet connection, your coverage report will be uploaded to coveralls.io. Refresh the repo page on coveralls to see the full report. You can see we have a 100% code coverage.
+
+On the details page, scroll down to find the `BADGE YOUR REPO` section. Click on the `EMBED` dropdown and copy the markdown code and paste it into your `README.md` file.
+
+### codeclimate
+
+1. Visit <https://codeclimate.com/oss/dashboard> and click on `Sign up with Github`. If you already have an account you may just log in.
+1. Once in your dashboard, click on `Add a repository`.
+1. Find the `express-API-template` repo from the list and click on `Add Repo`. 1. Wait for the build to complete and the redirect to the repo dashboard.
+1. Create the `.codeclimate.yml` file at the root of your project and add the below code.
+
+```yml
+version: "2" # required to adjust maintainability checks
+
+plugins:
+  duplication:
+    enabled: true
+  eslint:
+    enabled: true
+    channel: eslint-5
+exclude_patterns:
+  - node_modules/
+  - build/
+```
+
+Under `Codebase Summary`, click on `Test Coverage`. Under `Test coverage` menu, copy the `TEST REPORTER ID` and paste it in your `.travis.yml` as the value of `CC_TEST_REPORTER_ID`. Now remember to go paste this into your `.travis.yml` file.
+
+Still on the same page, on the left hand navigation, under `EXTRAS`, click on Badges. Copy the `maintainability` and `test coverage` badges in markdown format and paste them into your README.md file.
+
+### AppVeyor
+
+1. Visit <https://ci.appveyor.com> and login or sign up.
+1. On the next page, click on `NEW PROJECT`.
+1. From the repo list, find the `express-API-template` repo. Hover over it and click `ADD`.
+1. Click on `Settings` tab. Click on `Environment` on the left navigation. Add  `TEST_ENV_VARIABLE` and its value. Click save at the bottom of the page.
+1. Create the `appveyor.yml` file at the root of your project and paste in the below code
+
+```yml
+environment:
+    matrix:
+    - nodejs_version: "12"
+install:
+    - ps: Install-Product node $env:nodejs_version
+    - npm install
+test_script:
+    - node --version
+    - npm --version
+    - yarn test
+build: off
+```
+
+Click on `Settings` tab. On the left hand navigation, click on badges. Copy the markdown code and paste it in your `README.md` file.
+
+Now you might be wondering why I have both `travis-ci` and `appveyor` setup. The reason is that both run in different environments. `travis-ci` represent the linux side of things while appveyor represent the `windows` side of things. If your code runs without errors on both then you can be confident your code is cross-platform. I also include it for educational purpose.
+
+Commit your code and push to Github. If you have done everything as instructed all tests should pass and you should see your shiny new badges as shown below
+
+![Badges 01](imgs/shiny-new-badges.png)
