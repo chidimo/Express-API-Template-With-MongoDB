@@ -8,7 +8,8 @@
     "lint": "./node_modules/.bin/eslint ./src",
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
     "postpretty": "yarn lint --fix",
-    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
+    "test2": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
+    "test": "set NODE_ENV=test&set DEBUG=test&set DBNAME=testdb&nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "dependencies": {
@@ -18,7 +19,8 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pg": "^7.18.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.3",
