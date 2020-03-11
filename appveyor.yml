@@ -7,7 +7,6 @@ install:
 test_script:
     - node --version
     - yarn test
-build: off
 before_test:
   - SET PGUSER=postgres
   - SET PGPASSWORD=Password12!
