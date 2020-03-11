@@ -4,10 +4,11 @@ environment:
 install:
     - ps: Install-Product node $env:nodejs_version
     - yarn
-    - createdb testdb
 test_script:
     - node --version
     - yarn test
 build: off
+before_test:
+  - createdb testdb
 services:
   - postgresql10
