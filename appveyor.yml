@@ -4,7 +4,7 @@ environment:
 install:
     - ps: Install-Product node $env:nodejs_version
     - yarn
-    - psql createdb testdb
+    - createdb testdb
 test_script:
     - node --version
     - yarn test
