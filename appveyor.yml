@@ -10,8 +10,8 @@ test_script:
 build: off
 before_test:
   - SET PGUSER=postgres
-  - SET PGPASSWORD=Password12
-  - PATH=C:\Program Files\PostgreSQL\10\bin\;%PATH%
+  - SET PGPASSWORD=Password12!
+  - PATH=C:\Program Files\PostgreSQL\10.1\bin\;%PATH%
   - createdb testdb
 services:
-  - postgresql10
+  - postgresql101
