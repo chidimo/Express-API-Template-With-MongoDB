@@ -9,7 +9,7 @@
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**'",
     "postpretty": "yarn lint --fix",
     "test2": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
-    "test": "set NODE_ENV=test&set DEBUG=test&set DBNAME=testdb&nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
+    "test": "set NODE_ENV=test&set DEBUG=test&set DBNAME=testdb&nyc --reporter=html --reporter=text --reporter=lcov mocha --timeout 20s -r @babel/register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "createData": "babel-node ./src/utils/createData",
     "deleteData": "babel-node ./src/utils/deleteData"

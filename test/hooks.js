@@ -1,14 +1,11 @@
-import {
-  dropTables,
-  createTables,
-  insertIntoTables,
-} from '../src/utils/queryFunctions';
+import mongoose from 'mongoose';
+import { createData, deleteData } from '../src/utils/queryFunctions';
 
 before(async () => {
-  await createTables();
-  await insertIntoTables();
+  await createData();
 });
 
 after(async () => {
-  await dropTables();
+  await deleteData();
+  mongoose.connection.close();
 });

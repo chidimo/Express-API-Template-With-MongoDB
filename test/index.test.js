@@ -45,11 +45,8 @@ describe('Test home routes', () => {
       .send(data)
       .expect(200)
       .end((err, res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body.messages).to.be.instanceOf(Array);
-        res.body.messages.forEach(m => {
-          expect(m).to.have.property('id');
-        });
+        expect(res.status).to.equal(201);
+        expect(res.body.message).to.equal('Saved successfully!');
         done();
       });
   });
