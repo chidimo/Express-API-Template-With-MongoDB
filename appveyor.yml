@@ -9,6 +9,6 @@ test_script:
     - yarn test
 build: off
 build_script:
-  - psql createdb testdb
+  - createdb testdb
 services:
   - postgresql10
