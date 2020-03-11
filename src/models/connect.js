@@ -2,13 +2,13 @@
 import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 
-import { mongooseConnectionString } from '../settings';
+import { connectionString } from '../settings';
 
 dotenv.config();
 
 (async () => {
   try {
-    await mongoose.connect(mongooseConnectionString, {
+    await mongoose.connect(connectionString, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
