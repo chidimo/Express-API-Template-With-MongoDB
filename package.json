@@ -10,7 +10,8 @@
     "postpretty": "yarn lint --fix",
     "test2": "nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
     "test": "set NODE_ENV=test&set DEBUG=test&set DBNAME=testdb&nyc --reporter=html --reporter=text --reporter=lcov mocha -r @babel/register",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "executeQueries": "babel-node ./src/utils/executeQueries"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
