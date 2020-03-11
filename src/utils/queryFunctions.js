@@ -6,23 +6,14 @@ import {
   dropMessagesTable,
 } from './queries';
 
-export const createTables = async () => new Promise(resolve => {
-  [ createMessageTable ].forEach(async (q, index, array) => {
+export const executeQueryArray = async arr => new Promise(resolve => {
+  const stop = arr.length;
+  arr.forEach(async (q, index) => {
     await pool.query(q);
-    if (index === array.length - 1) resolve();
+    if (index + 1 === stop) resolve();
   });
 });
 
-export const insertIntoTables = async () => new Promise(resolve => {
-  [ insertMessages ].forEach(async (q, index, array) => {
-    await pool.query(q);
-    if (index === array.length - 1) resolve();
-  });
-});
-
-export const dropTables = async () => new Promise(resolve => {
-  [ dropMessagesTable ].forEach(async (q, index, array) => {
-    await pool.query(q);
-    if (index === array.length - 1) resolve();
-  });
-});
+export const dropTables = () => executeQueryArray([ dropMessagesTable ]);
+export const createTables = () => executeQueryArray([ createMessageTable ]);
+export const insertIntoTables = () => executeQueryArray([ insertMessages ]);
