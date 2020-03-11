@@ -13,6 +13,18 @@ const home = {
       res.status(200).json({ messages: err.stack });
     }
   },
+  addMessage: async (req, res) => {
+    const { name, message } = req.body;
+    const columns = 'name, message';
+    const values = `'${name}', '${message}'`;
+
+    try {
+      const data = await messages.insertWithReturnId(columns, values);
+      res.status(200).json({ messages: data.rows });
+    } catch (err) {
+      res.status(200).json({ messages: err.stack });
+    }
+  },
 };
 
 export default home;
