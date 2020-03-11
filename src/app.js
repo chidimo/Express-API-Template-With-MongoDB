@@ -4,6 +4,8 @@ import cookieParser from 'cookie-parser';
 
 import indexRouter from './routes/index';
 
+import './models/connect';
+
 const app = express();
 
 app.use(logger('dev'));

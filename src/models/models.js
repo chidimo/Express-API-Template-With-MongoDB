@@ -1,29 +1,8 @@
-import { pool } from './pool';
+import { Schema, model } from 'mongoose';
 
-class Model {
-  constructor(table) {
-    this.pool = pool;
-    this.table = table;
-    this.pool.on(
-      'error',
-      (err, client) => `Error, ${err}, on idle client${client}`
-    );
-  }
+const messageSchema = new Schema({
+  name: { type: String, required: true },
+  message: { type: String, required: true },
+});
 
-  async select(columns, clause) {
-    let query = `SELECT ${columns} FROM ${this.table}`;
-    if (clause) query += clause;
-    return this.pool.query(query);
-  }
-
-  async insertWithReturnId(columns, values) {
-    const query = `
-            INSERT INTO ${this.table}(${columns})
-            VALUES (${values})
-            RETURNING id
-        `;
-    return this.pool.query(query);
-  }
-}
-
-export default Model;
+export const Messages = model('messages', messageSchema);
