@@ -6,6 +6,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 
 import indexRouter from './routes/index';
+import { logErrors, clientError, serverError } from './errorHandlers';
 
 import './models/connect';
 
@@ -20,5 +21,9 @@ app.use(cors('*'));
 app.use(compression());
 
 app.use('/api/v1', indexRouter);
+
+app.use(logErrors);
+app.use(clientError);
+app.use(serverError);
 
 export default app;
