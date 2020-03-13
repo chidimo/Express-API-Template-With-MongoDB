@@ -1,6 +1,9 @@
+import debug from 'debug';
 import '../models/connect';
 
 import { Messages } from '../models/models';
+
+const logger = debug('dev');
 
 const data = [
   { name: 'orji', message: 'second message' },
@@ -16,7 +19,7 @@ export const createData = async () => new Promise(resolve => {
     try {
       await m.save();
     } catch (err) {
-      console.log(`error${err.message}`);
+      logger(`error: ${err.message}`);
     }
 
     if (index + 1 === stop) resolve();
@@ -30,7 +33,7 @@ export const deleteData = async () => new Promise(resolve => {
     try {
       await Messages.deleteOne({ name });
     } catch (err) {
-      console.log(`error${err.message}`);
+      logger(`error: ${err.message}`);
     }
 
     if (index + 1 === stop) resolve();
