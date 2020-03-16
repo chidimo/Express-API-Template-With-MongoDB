@@ -1,14 +1,14 @@
 {
-  "name": "express-api-template",
+  "name": "express-api-template-with-mongodb",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "babel ./src --out-dir build& set NODE_ENV=production& node ./build/bin/www",
-    "devstart": "set NODE_ENV=development&set DEBUG=dev&nodemon --exec babel-node ./src/bin/www",
+    "start": "babel ./src --out-dir build& node ./build/bin/www",
+    "startdev": "nodemon --exec babel-node ./src/bin/www",
     "lint": "./node_modules/.bin/eslint ./src",
     "pretty": "prettier --write '**/*.{js,json}' '!node_modules/**' '!build/**' '!coverage/**' '!.nyc_output/**'",
     "postpretty": "yarn lint --fix",
-    "test": "set NODE_ENV=test&set DEBUG=test&set DBNAME=testdb&nyc --reporter=html --reporter=text --reporter=lcov mocha --timeout 20s -r @babel/register",
+    "test": "nyc --reporter=html --reporter=text --reporter=lcov mocha --timeout 20s -r @babel/register",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "createData": "babel-node ./src/utils/createData",
     "deleteData": "babel-node ./src/utils/deleteData"
@@ -22,7 +22,6 @@
     "express": "~4.16.1",
     "helmet": "^3.21.3",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
     "mongoose": "^5.9.4",
     "morgan": "~1.9.1"
   },
