@@ -13,10 +13,9 @@ const home = {
   },
   addMessage: async (req, res, next) => {
     const { name, message } = req.body;
-    const m = Messages({ name, message });
     try {
-      await m.save();
-      res.status(201).json({ message: 'Saved successfully!' });
+      const m = await Messages({ name, message }).save();
+      res.status(200).json({ success: true, message: m });
     } catch (err) {
       next(err);
     }
